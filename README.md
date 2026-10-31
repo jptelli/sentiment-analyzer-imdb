@@ -22,7 +22,6 @@ Classificação de sentimentos em avaliações de filmes: um baseline clássico 
 - [Decisões de projeto](#decisões-de-projeto)
 - [Limitações](#limitações)
 - [Como contribuir](#como-contribuir)
-- [Licença](#licença)
 
 ## Visão geral
 
