@@ -1,0 +1,2 @@
+TF-IDF analisa palavra por palavra, não consegue compreender o contexto delas na frase, então quando uma review positiva contém palavras como hate, bad, worst, etc, o modelo tende a classifcar como uma análise negativa. Isso se repete em casos de análises negativas que contenham palavras positivas, casos de sarcasmo, ironia e reviews mistas. Apesar disso obteve uma precisão de quase 90% nas análises.
+50 000 reviews totais, sendo 25 000 positivas e 25 000 negativas

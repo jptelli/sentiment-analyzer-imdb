@@ -1,0 +1,6 @@
+venv/
+data/
+modelo_distilbert/
+tempCodeRunnerFile.py
+__pycache__/
+explorar.py
