@@ -1,6 +1,20 @@
-O dataset veio do Kaggle -> IMDB Dataset of 50K Movie Reviews
-50 000 reviews totais, sendo 25 000 positivas e 25 000 negativas
-TF-IDF analisa palavra por palavra, não consegue compreender o contexto delas na frase, então quando uma review positiva contém palavras como hate, bad, worst, etc, o modelo tende a classifcar como uma análise negativa. Isso se repete em casos de análises negativas que contenham palavras positivas, casos de sarcasmo, ironia e reviews mistas. Apesar disso obteve uma precisão de quase 89% nas análises.
-Vou fazer utilizando transformers, pois tem uma capacidade melhor de compreender o contexto das reviews
-Rodei no Google Colab utilizando a GPU T4, com os arquivos IMDB Dataset.csv e treinar_distilbert.py
-Precisão aumentou em cerca de 3,6%, obtendo 92,11%
+# Notas do projeto
+
+## Dataset
+IMDB Dataset of 50K Movie Reviews (Kaggle): 50.000 reviews, 25.000 positivas e 25.000 negativas (classes balanceadas).
+
+## Baseline: TF-IDF + Regressão Logística
+- Acurácia de 88,5% no conjunto de teste (10.000 reviews).
+- Limitação: o TF-IDF analisa palavra por palavra e não entende o contexto. Reviews positivas com palavras como "hate", "bad" ou "worst" tendem a ser classificadas como negativas, e o mesmo ocorre ao contrário. Também falha com sarcasmo, ironia e reviews mistas.
+- Exemplos reais de erro: "not that bad" (a negação é ignorada) e "if you hated the book, you will likely hate the movie" (a estrutura condicional se perde).
+
+## Upgrade: DistilBERT (fine-tuning)
+- Transformers entendem o contexto, porque processam o texto em sequência.
+- Treino no Google Colab (GPU T4), 2 épocas, max_length=256, aproximadamente 10 minutos.
+- Acurácia de 92,11% no mesmo conjunto de teste, um ganho de 3,6 pontos percentuais.
+- Em erros absolutos, de 1.146 para 789 em 10.000 reviews (31% menos erros).
+
+## Decisões
+- Mantive "not", "no" e "nor" fora da lista de stopwords no baseline, para preservar as negações.
+- Mesmo split (random_state=50) nos dois modelos, para a comparação ser justa.
+- O conjunto de teste foi usado apenas para monitorar o treino, e o modelo final (época 2) foi o avaliado, sem escolher a melhor época.

@@ -1,12 +1,23 @@
-import pandas as pd
+"""
+Fine-tuning do DistilBERT para classificação de sentimentos (IMDB).
+
+Requer GPU (fp16=True). Foi executado no Google Colab com GPU T4,
+com o arquivo "IMDB Dataset.csv" na pasta data/.
+Usa o mesmo split do baseline (random_state=50) para a comparação ser justa.
+"""
 import re
-from sklearn.model_selection import train_test_split
-from transformers import AutoTokenizer
-from transformers import AutoModelForSequenceClassification
-from datasets import Dataset
+
 import numpy as np
+import pandas as pd
+from datasets import Dataset
 from sklearn.metrics import accuracy_score
-from transformers import TrainingArguments, Trainer
+from sklearn.model_selection import train_test_split
+from transformers import (
+    AutoModelForSequenceClassification,
+    AutoTokenizer,
+    Trainer,
+    TrainingArguments,
+)
 
 df = pd.read_csv("data/IMDB Dataset.csv")
 

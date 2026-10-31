@@ -7,6 +7,10 @@ from tqdm import tqdm
 
 tqdm.pandas()
 
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('punkt_tab')
+
 df = pd.read_csv('data/IMDB Dataset.csv')
 
 stop_words = set(stopwords.words('english'))

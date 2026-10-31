@@ -3,9 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-import numpy as np
-from sklearn.metrics import accuracy_score
-from transformers import TrainingArguments, Trainer
+
 
 df = pd.read_csv('data/imdb_limpo.csv')
 
@@ -31,3 +29,13 @@ print("\nMatriz de confusão:\n", confusion_matrix(y_teste, previsoes))
 x_teste_original = df.loc[x_teste.index, 'review']
 erros = x_teste_original[previsoes != y_teste.values]
 print(erros.head())
+
+mapa = {'positive': 1, 'negative': 0}
+
+resultado = pd.DataFrame({
+    "indice_original": x_teste.index,
+    "real": y_teste.map(mapa).values,
+    "previsao_baseline": pd.Series(previsoes).map(mapa).values,
+})
+
+resultado.to_csv("previsoes_baseline.csv", index=False)
