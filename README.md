@@ -76,7 +76,6 @@ Matriz de confusão do baseline (linhas = real, colunas = previsto):
 
 ```text
 .
-├── explorar.py            # exploração do dataset
 ├── preProcessar.py        # limpeza do texto -> data/imdb_limpo.csv
 ├── treinar_modelo.py      # baseline: TF-IDF + Regressão Logística
 ├── treinar_distilbert.py  # fine-tuning do DistilBERT (requer GPU)
@@ -113,13 +112,7 @@ python -m pip install -r requirements.txt
 
 ## Uso
 
-### 1. Explorar o dataset
-
-```bash
-python explorar.py
-```
-
-### 2. Pré-processar o texto
+### 1. Pré-processar o texto
 
 ```bash
 python preProcessar.py
@@ -127,7 +120,7 @@ python preProcessar.py
 
 Gera `data/imdb_limpo.csv` com a coluna `review_limpa`. Em 50.000 avaliações, leva de 1 a 3 minutos.
 
-### 3. Treinar e avaliar o baseline
+### 2. Treinar e avaliar o baseline
 
 ```bash
 python treinar_modelo.py
@@ -135,7 +128,7 @@ python treinar_modelo.py
 
 Imprime a acurácia, o relatório de classificação, a matriz de confusão e alguns exemplos de erro.
 
-### 4. Fine-tuning do DistilBERT (GPU)
+### 3. Fine-tuning do DistilBERT (GPU)
 
 O script lê o CSV original (`data/IMDB Dataset.csv`) e usa o texto com as stopwords e a ordem das palavras preservadas, só sem as tags HTML. Isso porque o Transformer precisa do contexto completo.
 
